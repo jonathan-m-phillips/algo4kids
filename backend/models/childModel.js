@@ -19,15 +19,6 @@ const ChildSchema = new mongoose.Schema({
         type: Number,
         enum: [1, 2]
     },
-    coursesTaken: {
-        type: Array,
-    },
-    quizzesTaken: {
-        type: Array,
-    },
-    favoriteCourses: {
-        type: Array,
-    },
 },
     { timestamps: true }
 );
