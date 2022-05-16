@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const AvatarSchema = new mongoose.Schema({
-    user: {
+    child: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Child'
