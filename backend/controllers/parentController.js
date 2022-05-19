@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const Parent = require('../models/parentModel')
 
+
 // @desc    Register new parent
 // @route   POST /api/parent
 // @access  Public
@@ -54,6 +55,7 @@ const registerParent = asyncHandler(async (req, res) => {
     }
 })
 
+
 // @desc    Authenticate a parent
 // @route   POST /api/parent/login
 // @access  Public
@@ -69,12 +71,17 @@ const loginParent = asyncHandler(async (req, res) => {
             _id: parent._id,
             email: parent.email,
             token: generateToken(parent._id),
+            firstName: parent.firstName,
+            lastName: parent.lastName,
+            age: parent.age,
+            Address: parent.Address,
         })
     } else {
         res.status(400)
         throw new Error('Invalid credentials')
     }
 })
+
 
 // @desc    Get parent data
 // @route   GET /api/parent/me

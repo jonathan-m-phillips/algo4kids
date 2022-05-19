@@ -13,7 +13,20 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use('/api/parent', require('./routes/parentRoutes'))
 app.use('/api/child', require('./routes/childRoutes'))
-app.use('/api/avatar', require('./routes/avatarRoutes'))
+// app.use('/api/avatar', require('./routes/avatarRoutes'))
+
+// Serve frontend
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/build')))
+  
+    app.get('*', (req, res) =>
+      res.sendFile(
+        path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
+      )
+    )
+  } else {
+    app.get('/', (req, res) => res.send('Please set to production'))
+  }
 
 app.use(errorHandler)
 
