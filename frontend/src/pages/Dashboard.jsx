@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { React, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import ChildForm from '../components/ChildForm'
 import ChildData from '../components/ChildData'
@@ -43,16 +43,28 @@ function Dashboard() {
         <p>Dashboard</p>
       </section>
 
-      {/* This shows all the children data */}
       <section className='content'>
-        {children.length > 0 ? (
+        {children.length > 2 ? (
           <div className='children'>
             {children.map((child) => (
-              <ChildData key={child._id} child={child} />
+              <div key={child._id}>
+                <ChildData child={child} />
+                <Link to={`${child._id}`}>Click here</Link>
+              </div>
             ))}
           </div>
         ) : (
-          <ChildForm />
+          <div>
+            <ChildForm />
+            <div className='children'>
+              {children.map((child) => (
+                <div key={child._id}>
+                  <ChildData child={child} />
+                  <Link to={`${child._id}`}>Click here</Link>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
       </section>
     </>

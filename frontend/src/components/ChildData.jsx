@@ -7,9 +7,9 @@ function ChildData({ child }) {
     return (
         <div className="child">
             <div>
+                <h2>{child.username}</h2>
                 {new Date(child.createdAt).toLocaleString('en-US')}
             </div>
-            <h2>{child.username}</h2>
             {/* <button onClick={() => dispatch(deleteGoal(goal._id))} className="close">X</button> */}
         </div>
     )

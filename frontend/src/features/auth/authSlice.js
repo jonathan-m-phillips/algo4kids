@@ -30,24 +30,6 @@ export const register = createAsyncThunk(
   }
 )
 
-// Update parent
-export const updateParent = createAsyncThunk(
-  'auth/update',
-  async (parent, thunkAPI) => {
-    try {
-      return await authService.updateParent(parent.Child)
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString()
-      return thunkAPI.rejectWithValue(message)
-    }
-  }
-)
-
 // Login parent
 export const login = createAsyncThunk('auth/login', async (parent, thunkAPI) => {
   try {

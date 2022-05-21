@@ -3,11 +3,38 @@ const asyncHandler = require('express-async-handler')
 const Child = require('../models/childModel')
 const Parent = require('../models/parentModel')
 
+// @desc    Get child
+// @route   GET /api/child/:id
+// @access  Private
+const getChild = asyncHandler(async (req, res) => {
+    const child = await Child.findById(req.params.id)
+
+    // Check for child
+    if (!child) {
+        res.status(400)
+        throw new Error('Child not found')
+    }
+
+    // Check for parent
+    if (!req.parent) {
+        res.status(401)
+        throw new Error('Parent not found')
+    }
+
+    // Make sure the logged in parent matches the child's parent
+    if (child.parent.toString() !== req.parent.id) {
+        res.status(401)
+        throw new Error('Parent not authorized')
+    }
+
+    res.status(200).json({ id: req.params.id })
+})
+
 // @desc    Get children
 // @route   GET /api/child
 // @access  Private
 const getChildren = asyncHandler(async (req, res) => {
-    const children = await Child.find( { user: req.parent.id })
+    const children = await Child.find( { parent: req.parent.id })
 
     res.status(200).json(children)
 })
@@ -47,7 +74,7 @@ const updateChild = asyncHandler(async (req, res) => {
         throw new Error('Child not found')
     }
 
-    // Check for user
+    // Check for parent
     if (!req.parent) {
         res.status(401)
         throw new Error('Parent not found')
@@ -79,16 +106,16 @@ const deleteChild = asyncHandler(async (req, res) => {
         throw new Error('Child not found')
     }
 
-    // Check for user
-    if (!req.user) {
+    // Check for parent
+    if (!req.parent) {
         res.status(401)
-        throw new Error('User not found')
+        throw new Error('Parent not found')
     }
 
     // Make sure the logged in parent matches the child's parent
     if (child.parent.toString() !== req.parent.id) {
         res.status(401)
-        throw new Error('User not authorized')
+        throw new Error('Parent not authorized')
     }
 
     await child.remove()
@@ -97,6 +124,7 @@ const deleteChild = asyncHandler(async (req, res) => {
 
 
 module.exports = {
+    getChild,
     getChildren,
     addChild,
     updateChild,

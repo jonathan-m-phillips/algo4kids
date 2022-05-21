@@ -5,8 +5,10 @@ import Header from './components/Header'
 import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import ChildDashboard from './pages/ChildDashboard'
 
 function App() {
+
   return (
     <>
       <Router>
@@ -16,6 +18,7 @@ function App() {
             <Route path='/' element={<Dashboard />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/:id' element={<ChildDashboard />} />
           </Routes>
         </div>
       </Router>

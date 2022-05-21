@@ -1,7 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import childService from './childService'
 
+// Get child from localStorage
+const child = JSON.parse(localStorage.getItem('child'))
+
 const initialState = {
+    child: child ? child : null,
     children: [],
     isError: false,
     isSuccess: false,

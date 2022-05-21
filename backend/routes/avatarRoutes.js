@@ -1,14 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const { 
+    getAvatar,
     createAvatar,
+    updateAvatar,
 } = require('../controllers/avatarController')
 const { protect } = require('../middleware/authMiddleware.js')
 
-// router.route('/').get(protect, getGoals).post(protect, setGoal)
-// router.route('/:id').delete(protect, deleteGoal).put(protect, updateGoal)
-
-
-router.route('/create').post(protect, createAvatar)
+router.route('/').get(protect, getAvatar).post(protect, createAvatar)
+router.route('/:id').put(protect, updateAvatar)
 
 module.exports = router
