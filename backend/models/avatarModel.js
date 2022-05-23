@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 
 const AvatarSchema = new mongoose.Schema({
-    child: {
+    parent: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Child'
+        ref: 'Parent'
+    },
+    child: {
+        type: String,
     },
     bodyType: {
         type: Number,

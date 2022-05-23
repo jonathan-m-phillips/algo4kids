@@ -3,25 +3,35 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../components/Spinner'
 import { reset } from '../features/auth/authSlice'
-// import ChildData from '../components/ChildData'
-// import { getChild } from '../features/child/childSlice'
+import { getAvatars } from '../features/avatar/avatarSlice'
+import AvatarForm from '../components/AvatarForm'
+import AvatarData from '../components/AvatarData'
 
 function ChildDashboard() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const { parent } = useSelector((state) => state.auth)
-    const { children, isLoading, isError, message } = useSelector(
-        (state) => state.children
+    const { children } = useSelector((state) => state.children)
+    const { avatars, isLoading, isError, message } = useSelector(
+        (state) => state.avatars
     )
 
+    const currLocation = window.location.href
+
+    // if child id is in parameter
     let child = null
     children.forEach(c => {
-        if (window.location.href.includes(c._id)) {
+        if (currLocation.includes(c._id)) {
             child = c
-            console.log(child)
-        } else {
-            console.log("error")
+        }
+    })
+
+    // if child id is in avatar
+    let avatar = null
+    avatars.forEach(a => {
+        if (currLocation.includes(a.child)) {
+            avatar = a
         }
     })
 
@@ -38,6 +48,8 @@ function ChildDashboard() {
             navigate('/')
         }
 
+        dispatch(getAvatars())
+
         return () => {
             dispatch(reset())
         }
@@ -48,19 +60,45 @@ function ChildDashboard() {
         return <Spinner />
     }
 
-    return (
-        <>
-            <section className='content'>
-                {children.length > 0 ? (
-                    <div className='children'>
+
+    // if child exists then display child
+    if (children.length > 0) {
+
+        // If avatar exists already display avatar
+        if (avatar) {
+            return (
+                <div>
+                    <div className='child'>
                         <h1>{child.username}</h1>
                     </div>
-                ) : (
-                    <h1>You does not have access to this child page</h1>
-                )}
-            </section>
-        </>
-    )
+                    <div>
+                        <div >
+                            <AvatarData key={avatar._id} avatar={avatar} />
+                        </div>
+                    </div>
+                </div>
+            )
+
+            // If avatar does not exist then create one
+        } else {
+            return (
+                <div>
+                    <div className='child'>
+                        <h1>{child.username}</h1>
+                    </div>
+                    <div>
+                        <AvatarForm />
+                    </div>
+                </div>
+            )
+        }
+
+        // If child does not exist for user then return no child present
+    } else {
+        return (
+            <h1>No Child Present</h1>
+        )
+    }
 }
 
 export default ChildDashboard

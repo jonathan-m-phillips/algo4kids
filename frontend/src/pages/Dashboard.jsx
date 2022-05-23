@@ -44,18 +44,8 @@ function Dashboard() {
       </section>
 
       <section className='content'>
-        {children.length > 2 ? (
-          <div className='children'>
-            {children.map((child) => (
-              <div key={child._id}>
-                <ChildData child={child} />
-                <Link to={`${child._id}`}>Click here</Link>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div>
-            <ChildForm />
+        {children.length > 2 ?
+          (
             <div className='children'>
               {children.map((child) => (
                 <div key={child._id}>
@@ -64,8 +54,20 @@ function Dashboard() {
                 </div>
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div>
+              <ChildForm />
+              <div className='children'>
+                {children.map((child) => (
+                  <div key={child._id}>
+                    <ChildData child={child} />
+                    <Link to={`${child._id}`}>Click here</Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        }
       </section>
     </>
   )

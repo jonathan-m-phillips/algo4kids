@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import ChildDashboard from './pages/ChildDashboard'
+// import AvatarDashboard from './pages/AvatarDashboard'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/:id' element={<ChildDashboard />} />
+            {/* <Route path='/avatar/:id' element={<AvatarDashboard />} /> */}
           </Routes>
         </div>
       </Router>

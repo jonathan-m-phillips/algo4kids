@@ -1,21 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import childService from './childService'
+import avatarService from './avatarService'
 
 const initialState = {
-    children: [],
+    avatars: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
     message: '',
 }
 
-// Add child
-export const addChild = createAsyncThunk(
-    'child/create',
-    async (childData, thunkAPI) => {
+// Create avatar
+export const createAvatar = createAsyncThunk(
+    'avatar/create',
+    async (avatarData, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.parent.token
-            return await childService.addChild(childData, token)
+            return await avatarService.createAvatar(avatarData, token)
         } catch (error) {
             const message =
                 (error.response &&
@@ -28,13 +28,13 @@ export const addChild = createAsyncThunk(
     }
 )
 
-// Get children
-export const getChildren = createAsyncThunk(
-    'child/getAll',
+// Get Avatars
+export const getAvatars = createAsyncThunk(
+    'avatar/getAll',
     async (_, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.parent.token
-            return await childService.getChildren(token)
+            return await avatarService.getAvatars(token)
         } catch (error) {
             const message =
                 (error.response &&
@@ -47,13 +47,13 @@ export const getChildren = createAsyncThunk(
     }
 )
 
-// Delete child
-export const deleteChild = createAsyncThunk(
-    'child/delete',
+// Delete avatar
+export const deleteAvatar = createAsyncThunk(
+    'avatar/delete',
     async (id, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.parent.token
-            return await childService.deleteChild(id, token)
+            return await avatarService.deleteAvatar(id, token)
         } catch (error) {
             const message =
                 (error.response &&
@@ -66,51 +66,51 @@ export const deleteChild = createAsyncThunk(
     }
 )
 
-export const childSlice = createSlice({
-    name: 'child',
+export const avatarSlice = createSlice({
+    name: 'avatar',
     initialState,
     reducers: {
         reset: (state) => initialState,
     },
     extraReducers: (builder) => {
         builder
-            .addCase(addChild.pending, (state) => {
+            .addCase(createAvatar.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(addChild.fulfilled, (state, action) => {
+            .addCase(createAvatar.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.children.push(action.payload)
+                state.avatars.push(action.payload)
             })
-            .addCase(addChild.rejected, (state, action) => {
+            .addCase(createAvatar.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
             })
-            .addCase(getChildren.pending, (state) => {
+            .addCase(getAvatars.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(getChildren.fulfilled, (state, action) => {
+            .addCase(getAvatars.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.children = action.payload
+                state.avatars = action.payload
             })
-            .addCase(getChildren.rejected, (state, action) => {
+            .addCase(getAvatars.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
             })
-            .addCase(deleteChild.pending, (state) => {
+            .addCase(deleteAvatar.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(deleteChild.fulfilled, (state, action) => {
+            .addCase(deleteAvatar.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.children = state.children.filter(
-                    (child) => child._id !== action.payload.id
+                state.avatars = state.avatars.filter(
+                    (avatar) => avatar._id !== action.payload.id
                 )
             })
-            .addCase(deleteChild.rejected, (state, action) => {
+            .addCase(deleteAvatar.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
@@ -118,5 +118,5 @@ export const childSlice = createSlice({
     },
 })
 
-export const { reset } = childSlice.actions
-export default childSlice.reducer
+export const { reset } = avatarSlice.actions
+export default avatarSlice.reducer

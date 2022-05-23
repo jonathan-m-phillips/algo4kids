@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use('/api/parent', require('./routes/parentRoutes'))
 app.use('/api/child', require('./routes/childRoutes'))
-// app.use('/api/avatar', require('./routes/avatarRoutes'))
+app.use('/api/avatar', require('./routes/avatarRoutes'))
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {

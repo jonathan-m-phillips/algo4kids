@@ -1,25 +1,26 @@
 const asyncHandler = require('express-async-handler')
 const Avatar = require('../models/avatarModel')
 
-// @desc    Get children
-// @route   GET /api/child
+// @desc    Get avatars
+// @route   GET /api/avatar
 // @access  Private
-const getAvatar = asyncHandler(async (req, res) => {
-    const avatar = await Avatar.find( { child: req.child.id })
+const getAvatars = asyncHandler(async (req, res) => {
+    const avatars = await Avatar.find({ parent: req.parent.id })
 
-    res.status(200).json(avatar)
+    res.status(200).json(avatars)
 })
 
 // @desc    Create avatar
 // @route   POST /api/avatar/create
 // @access  Private
 const createAvatar = asyncHandler(async (req, res) => {
-    const { bodyType, clothing, face, mouth, nose,
-        eyes, skinColor, accessories, 
+    const { child, bodyType, clothing, face, mouth, nose,
+        eyes, skinColor, accessories,
         hairColor, hairStyle } = req.body
 
     const avatar = await Avatar.create({
-        child: req.child.id,
+        parent: req.parent.id,
+        child: req.body.child,
         bodyType: req.body.bodyType,
         clothing: req.body.clothing,
         face: req.body.face,
@@ -42,23 +43,23 @@ const createAvatar = asyncHandler(async (req, res) => {
 const updateAvatar = asyncHandler(async (req, res) => {
     const avatar = await Avatar.findById(req.params.id)
 
-    // Check for child
+    // Check for avatar
     if (!avatar) {
         res.status(400)
-        throw new Error('Child not found')
+        throw new Error('Avatar not found')
     }
 
     // Check for parent
-    if (!req.child) {
+    if (!req.parent) {
         res.status(401)
-        throw new Error('Parent not found')
+        throw new Error('Child not found')
     }
 
     // Make sure the logged in parent matches the child's parent
-    if (avatar.child.toString() !== req.child.id) {
-        res.status(401)
-        throw new Error('Parent not authorized')
-    }
+    // if (avatar.child.toString() !== req.child.id) {
+    //     res.status(401)
+    //     throw new Error('Parent not authorized')
+    // }
 
     const updatedAvatar = await Avatar.findByIdAndUpdate(req.params.id, req.body, {
         new: true
@@ -68,7 +69,7 @@ const updateAvatar = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-    getAvatar,
+    getAvatars,
     createAvatar,
     updateAvatar,
 }
