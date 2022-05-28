@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler')
 
-const Child = require('../models/childModel')
-const Parent = require('../models/parentModel')
+const Child = require('../model/childModel')
+const Parent = require('../model/parentModel')
 
 // @desc    Get child
 // @route   GET /api/child/:id

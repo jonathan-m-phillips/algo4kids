@@ -16,9 +16,15 @@ const ChildSchema = new mongoose.Schema({
         enum: [1, 2, 3]
     },
     gender: {
-        type: Number,
-        enum: [1, 2]
+        type: String,
+        enum: ['MALE', 'FEMALE']
     },
+    courses: {
+        type: Array
+    },
+    quizzes: {
+        type: Array
+    }
 },
     { timestamps: true }
 );

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
-const Parent = require('../models/parentModel')
+const Parent = require('../model/parentModel')
 
 
 // @desc    Register new parent

@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler')
-const Avatar = require('../models/avatarModel')
+const Avatar = require('../model/avatarModel')
 
 // @desc    Get avatars
 // @route   GET /api/avatar
