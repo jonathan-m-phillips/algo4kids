@@ -14,7 +14,7 @@ export const createAvatar = createAsyncThunk(
     'avatar/create',
     async (avatarData, thunkAPI) => {
         try {
-            const token = thunkAPI.getState().auth.parent.token
+            const token = thunkAPI.getState().parents.parent.token
             return await avatarService.createAvatar(avatarData, token)
         } catch (error) {
             const message =
@@ -33,7 +33,7 @@ export const getAvatars = createAsyncThunk(
     'avatar/getAll',
     async (_, thunkAPI) => {
         try {
-            const token = thunkAPI.getState().auth.parent.token
+            const token = thunkAPI.getState().parents.parent.token
             return await avatarService.getAvatars(token)
         } catch (error) {
             const message =
@@ -52,7 +52,7 @@ export const deleteAvatar = createAsyncThunk(
     'avatar/delete',
     async (id, thunkAPI) => {
         try {
-            const token = thunkAPI.getState().auth.parent.token
+            const token = thunkAPI.getState().parents.parent.token
             return await avatarService.deleteAvatar(id, token)
         } catch (error) {
             const message =

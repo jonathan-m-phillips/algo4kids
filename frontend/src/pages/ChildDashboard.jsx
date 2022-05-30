@@ -2,16 +2,18 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../components/Spinner'
-import { reset } from '../features/auth/authSlice'
+import { reset } from '../features/parent/parentSlice'
 import { getAvatars } from '../features/avatar/avatarSlice'
-import AvatarForm from '../components/AvatarForm'
-import AvatarData from '../components/AvatarData'
+import AvatarForm from '../components/avatar/AvatarForm'
+import AvatarData from '../components/avatar/AvatarData'
 
 function ChildDashboard() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const { parent } = useSelector((state) => state.auth)
+
+
+    const { parent } = useSelector((state) => state.parents)
     const { children } = useSelector((state) => state.children)
     const { avatars, isLoading, isError, message } = useSelector(
         (state) => state.avatars
@@ -41,7 +43,7 @@ function ChildDashboard() {
         }
 
         if (!parent) {
-            navigate('/login')
+            navigate('/')
         }
 
         if (children.length === 0) {

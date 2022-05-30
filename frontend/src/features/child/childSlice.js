@@ -14,7 +14,7 @@ export const addChild = createAsyncThunk(
     'child/create',
     async (childData, thunkAPI) => {
         try {
-            const token = thunkAPI.getState().auth.parent.token
+            const token = thunkAPI.getState().parents.parent.token
             return await childService.addChild(childData, token)
         } catch (error) {
             const message =
@@ -33,7 +33,7 @@ export const getChildren = createAsyncThunk(
     'child/getAll',
     async (_, thunkAPI) => {
         try {
-            const token = thunkAPI.getState().auth.parent.token
+            const token = thunkAPI.getState().parents.parent.token
             return await childService.getChildren(token)
         } catch (error) {
             const message =
@@ -52,7 +52,7 @@ export const deleteChild = createAsyncThunk(
     'child/delete',
     async (id, thunkAPI) => {
         try {
-            const token = thunkAPI.getState().auth.parent.token
+            const token = thunkAPI.getState().parents.parent.token
             return await childService.deleteChild(id, token)
         } catch (error) {
             const message =

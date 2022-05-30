@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import authService from './authService'
+import parentService from './parentService'
 
 // Get parent from localStorage
 const parent = JSON.parse(localStorage.getItem('parent'))
@@ -14,10 +14,10 @@ const initialState = {
 
 // Register parent
 export const register = createAsyncThunk(
-  'auth/register',
+  'parent/register',
   async (parent, thunkAPI) => {
     try {
-      return await authService.register(parent)
+      return await parentService.register(parent)
     } catch (error) {
       const message =
         (error.response &&
@@ -31,9 +31,9 @@ export const register = createAsyncThunk(
 )
 
 // Login parent
-export const login = createAsyncThunk('auth/login', async (parent, thunkAPI) => {
+export const login = createAsyncThunk('parent/login', async (parent, thunkAPI) => {
   try {
-    return await authService.login(parent)
+    return await parentService.login(parent)
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -43,12 +43,12 @@ export const login = createAsyncThunk('auth/login', async (parent, thunkAPI) => 
   }
 })
 
-export const logout = createAsyncThunk('auth/logout', async () => {
-  await authService.logout()
+export const logout = createAsyncThunk('parent/logout', async () => {
+  await parentService.logout()
 })
 
-export const authSlice = createSlice({
-  name: 'auth',
+export const parentSlice = createSlice({
+  name: 'parent',
   initialState,
   reducers: {
     reset: (state) => {
@@ -94,5 +94,5 @@ export const authSlice = createSlice({
   },
 })
 
-export const { reset } = authSlice.actions
-export default authSlice.reducer
+export const { reset } = parentSlice.actions
+export default parentSlice.reducer

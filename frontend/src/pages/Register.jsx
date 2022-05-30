@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
-import { register, reset } from '../features/auth/authSlice'
+import { register, reset } from '../features/parent/parentSlice'
 import Spinner from '../components/Spinner'
 
 function Register() {
@@ -34,7 +34,7 @@ function Register() {
     const dispatch = useDispatch()
 
     const { parent, isLoading, isError, isSuccess, message } = useSelector(
-        (state) => state.auth
+        (state) => state.parents
     )
 
     useEffect(() => {

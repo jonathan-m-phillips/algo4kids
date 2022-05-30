@@ -29,10 +29,10 @@ const logout = () => {
   localStorage.removeItem('parent')
 }
 
-const authService = {
+const parentService = {
   register,
   logout,
   login,
 }
 
-export default authService
+export default parentService

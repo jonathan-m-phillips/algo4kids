@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addChild } from '../features/child/childSlice'
+import { addChild } from '../../features/child/childSlice'
 
 function ChildForm() {
     const [childData, setChildData] = useState({

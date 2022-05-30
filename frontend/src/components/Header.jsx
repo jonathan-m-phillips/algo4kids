@@ -1,12 +1,12 @@
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { logout, reset } from '../features/auth/authSlice'
+import { logout, reset } from '../features/parent/parentSlice'
 
 function Header() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { parent } = useSelector((state) => state.auth)
+    const { parent } = useSelector((state) => state.parents)
 
     const onLogout = () => {
         dispatch(logout())

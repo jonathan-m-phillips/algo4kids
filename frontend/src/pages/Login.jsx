@@ -3,7 +3,7 @@ import { FaSignInAlt } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { login, reset } from '../features/auth/authSlice'
+import { login, reset } from '../features/parent/parentSlice'
 import Spinner from '../components/Spinner'
 
 function Login() {
@@ -18,7 +18,7 @@ function Login() {
     const dispatch = useDispatch()
 
     const { parent, isLoading, isError, isSuccess, message } = useSelector(
-        (state) => state.auth
+        (state) => state.parents
     )
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { createAvatar } from '../features/avatar/avatarSlice'
+import { createAvatar } from '../../features/avatar/avatarSlice'
 
 function AvatarForm() {
     const [avatarData, setAvatarData] = useState({
@@ -17,7 +17,7 @@ function AvatarForm() {
         hairStyle: '',
     })
 
-    const { child, bodyType, clothing,
+    const { bodyType, clothing,
         face, mouth, nose,
         eyes, skinColor, accessories,
         hairColor, hairStyle } = avatarData

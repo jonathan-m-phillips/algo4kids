@@ -1,17 +1,17 @@
 import { React, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import ChildForm from '../components/ChildForm'
-import ChildData from '../components/ChildData'
+import ChildForm from '../components/child/ChildForm'
+import ChildData from '../components/child/ChildData'
 import Spinner from '../components/Spinner'
 import { getChildren } from '../features/child/childSlice'
-import { reset } from '../features/auth/authSlice'
+import { reset } from '../features/parent/parentSlice'
 
 function Dashboard() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { parent } = useSelector((state) => state.auth)
+  const { parent } = useSelector((state) => state.parents)
   const { children, isLoading, isError, message } = useSelector(
     (state) => state.children
   )
@@ -44,7 +44,7 @@ function Dashboard() {
       </section>
 
       <section className='content'>
-        {children.length > 2 ?
+        {children.length >= 2 ?
           (
             <div className='children'>
               {children.map((child) => (
