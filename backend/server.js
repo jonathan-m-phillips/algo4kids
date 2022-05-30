@@ -11,6 +11,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use('/api/admin', require('./admin/routes/adminRoutes'))
 app.use('/api/parent', require('./parent/routes/parentRoutes'))
 app.use('/api/child', require('./child/routes/childRoutes'))
 app.use('/api/avatar', require('./avatar/routes/avatarRoutes'))

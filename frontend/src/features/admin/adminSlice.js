@@ -14,7 +14,7 @@ const initialState = {
 
 // Register admin
 export const register = createAsyncThunk(
-  'admin/register',
+  'admin/register-admin',
   async (admin, thunkAPI) => {
     try {
       return await adminService.register(admin)
@@ -31,7 +31,7 @@ export const register = createAsyncThunk(
 )
 
 // Login admin
-export const login = createAsyncThunk('admin/login', async (admin, thunkAPI) => {
+export const login = createAsyncThunk('admin/login-admin', async (admin, thunkAPI) => {
   try {
     return await adminService.login(admin)
   } catch (error) {
