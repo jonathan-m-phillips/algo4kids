@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
-const Parent = require('../models/parentModel')
+const Parent = require('../parent/models/parentModel')
 
 const protect = asyncHandler(async (req, res, next) => {
     let token

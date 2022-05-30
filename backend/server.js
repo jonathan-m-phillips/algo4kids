@@ -2,7 +2,7 @@ const express = require('express')
 const colors = require('colors')
 const dotenv = require('dotenv').config()
 const { errorHandler } = require('./_middleware/errorMiddleware')
-const connectDB = require('./config/db')
+const connectDB = require('./_config/db')
 const port = process.env.PORT || 5000
 
 connectDB()
@@ -11,9 +11,9 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use('/api/parent', require('./routes/parentRoutes'))
-app.use('/api/child', require('./routes/childRoutes'))
-app.use('/api/avatar', require('./routes/avatarRoutes'))
+app.use('/api/parent', require('./parent/routes/parentRoutes'))
+app.use('/api/child', require('./child/routes/childRoutes'))
+app.use('/api/avatar', require('./avatar/routes/avatarRoutes'))
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {

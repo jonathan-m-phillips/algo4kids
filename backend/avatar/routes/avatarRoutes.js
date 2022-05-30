@@ -5,7 +5,7 @@ const {
     createAvatar,
     updateAvatar,
 } = require('../controllers/avatarController')
-const { protect } = require('../../middleware/authMiddleware.js')
+const { protect } = require('../../_middleware/authMiddleware.js')
 
 router.route('/').get(protect, getAvatars).post(protect, createAvatar)
 router.route('/:id').put(protect, updateAvatar)

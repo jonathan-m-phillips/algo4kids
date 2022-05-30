@@ -7,7 +7,8 @@ function AvatarData({ avatar }) {
     return (
         <div className="avatar">
             <div>
-                <h2>{avatar.bodyType}</h2>
+                {/* <h2>{avatar.bodyType}</h2> */}
+                <h2>Avatar created already - this would be avatar output</h2>
                 {/* {new Date(avatar.createdAt).toLocaleString('en-US')} */}
             </div>
             {/* <button onClick={() => dispatch(deleteGoal(goal._id))} className="close">X</button> */}

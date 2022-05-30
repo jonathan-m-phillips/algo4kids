@@ -61,10 +61,10 @@ function ChildDashboard() {
     }
 
 
-    // if child exists then display child
+    // if child exists -> display child
     if (children.length > 0) {
 
-        // If avatar exists already display avatar
+        // If avatar exists -> display avatar
         if (avatar) {
             return (
                 <div>
@@ -79,7 +79,7 @@ function ChildDashboard() {
                 </div>
             )
 
-            // If avatar does not exist then create one
+            // If avatar does not exist -> create one
         } else {
             return (
                 <div>
