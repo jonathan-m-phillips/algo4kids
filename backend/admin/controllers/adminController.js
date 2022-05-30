@@ -9,10 +9,9 @@ const Admin = require('../models/adminModel')
 // @access  Public
 const registerAdmin = asyncHandler(async (req, res) => {
     const { email, password, firstName,
-        lastName, age, Address } = req.body
+        lastName } = req.body
 
-    if (!email || !password || !firstName || !lastName ||
-        !age || !Address) {
+    if (!email || !password || !firstName || !lastName ) {
         res.status(400)
         throw new Error('Please add all fields')
     } else if (!email.includes('@thirdandmrkt.com')) {

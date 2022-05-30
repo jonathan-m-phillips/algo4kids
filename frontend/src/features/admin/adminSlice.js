@@ -6,7 +6,6 @@ const admin = JSON.parse(localStorage.getItem('admin'))
 
 const initialState = {
   admin: admin ? admin : null,
-  isValidEmail: false,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -53,7 +52,6 @@ export const adminSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      state.isValidEmail = false
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
@@ -66,13 +64,11 @@ export const adminSlice = createSlice({
         state.isLoading = true
       })
       .addCase(register.fulfilled, (state, action) => {
-        state.isValidEmail = true
         state.isLoading = false
         state.isSuccess = true
         state.admin = action.payload
       })
       .addCase(register.rejected, (state, action) => {
-        state.isValidEmail = false
         state.isLoading = false
         state.isError = true
         state.message = action.payload

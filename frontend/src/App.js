@@ -2,12 +2,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
+
 import AdminRegister from './pages/admin/Register'
 import AdminDashboard from './pages/admin/Dashboard'
 import AdminLogin from './pages/admin/Login'
+
 import ParentRegister from './pages/parent/Register'
 import ParentLogin from './pages/parent/Login'
 import ParentDashboard from './pages/parent/Dashboard'
+
 import ChildDashboard from './pages/child/Dashboard'
 
 // import AvatarDashboard from './pages/AvatarDashboard'

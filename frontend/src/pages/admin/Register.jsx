@@ -26,12 +26,8 @@ function Register() {
     )
 
     useEffect(() => {
-        if (isError) {
-            toast.error(message)
-        }
-
         if (isSuccess || admin) {
-            navigate('/')
+            navigate('/admin')
         }
 
         dispatch(reset())
@@ -47,16 +43,14 @@ function Register() {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        if (password !== password2) {
+        if (password !== password2 && email.includes('@thirdandmrkt.com')) {
             toast.error('Passwords do not match')
-        }
-        
-        // else if (!email.includes('@thirdandmrkt.com'))  {
-        //     alert('You do not have authority to create an admin account.')
-        //     navigate('/register')
-        // } 
-        
-        else {
+        } else if (!email.includes('@thirdandmrkt.com')) {
+            toast.error('You do not have authority to create an admin account.')
+            navigate('/register')
+        } else if (isError) {
+            toast.error(message)
+        } else {
 
             const adminData = {
                 email,
