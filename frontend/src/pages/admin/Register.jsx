@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
-import { register, reset } from '../features/parent/parentSlice'
-import Spinner from '../components/Spinner'
+import { register, reset } from '../../features/admin/adminSlice'
+import Spinner from '../../components/Spinner'
 
 function Register() {
     const [formData, setFormData] = useState({
@@ -12,29 +12,17 @@ function Register() {
         password: '',
         password2: '',
         firstName: '',
-        lastName: '',
-        age: '',
+        lastName: ''
     })
 
     const { email, password, password2, firstName,
-        lastName, age } = formData
-
-    // Breaking the Address object outside of the Parent object
-    // and then will be adding to the Parent later
-    const [addressData, setAddressData] = useState({
-        street: '',
-        city: '',
-        state: '',
-        zipcode: '',
-    })
-
-    const { street, city, state, zipcode } = addressData
+        lastName } = formData
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const { parent, isLoading, isError, isSuccess, message } = useSelector(
-        (state) => state.parents
+    const { admin, isLoading, isError, isSuccess, message } = useSelector(
+        (state) => state.admin
     )
 
     useEffect(() => {
@@ -42,12 +30,12 @@ function Register() {
             toast.error(message)
         }
 
-        if (isSuccess || parent) {
+        if (isSuccess || admin) {
             navigate('/')
         }
 
         dispatch(reset())
-    }, [parent, isError, isSuccess, message, navigate, dispatch])
+    }, [admin, isError, isSuccess, message, navigate, dispatch])
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -56,43 +44,28 @@ function Register() {
         }))
     }
 
-    const onAddressChange = (e) => {
-        setAddressData((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-        }))
-    }
-
     const onSubmit = (e) => {
         e.preventDefault()
 
         if (password !== password2) {
             toast.error('Passwords do not match')
-        } else {
+        }
+        
+        // else if (!email.includes('@thirdandmrkt.com'))  {
+        //     alert('You do not have authority to create an admin account.')
+        //     navigate('/register')
+        // } 
+        
+        else {
 
-            // Created to store addressData in parentData
-            const addressData = {
-                street,
-                city,
-                state,
-                zipcode
-            }
-
-            const parentData = {
+            const adminData = {
                 email,
                 password,
                 firstName,
-                lastName,
-                age,
-                Address: {
-                    street: addressData.street,
-                    city: addressData.city,
-                    state: addressData.state,
-                    zipcode: addressData.zipcode
-                }
+                lastName
             }
 
-            dispatch(register(parentData))
+            dispatch(register(adminData))
         }
     }
 
@@ -104,9 +77,9 @@ function Register() {
         <>
             <section className='heading'>
                 <h1>
-                    <FaUser /> Register
+                    <FaUser /> Register admin
                 </h1>
-                <p>Please create an account</p>
+                <p>Please create an admin account</p>
             </section>
 
             <section className='form'>
@@ -164,61 +137,6 @@ function Register() {
                             value={lastName}
                             placeholder='Enter your last name'
                             onChange={onChange}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input
-                            type='text'
-                            className='form-control'
-                            id='age'
-                            name='age'
-                            value={age}
-                            placeholder='Enter your age'
-                            onChange={onChange}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input
-                            type='text'
-                            className='form-control'
-                            id='Address-street'
-                            name='street'
-                            value={street}
-                            placeholder='Enter your street'
-                            onChange={onAddressChange}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input
-                            type='text'
-                            className='form-control'
-                            id='Address-city'
-                            name='city'
-                            value={city}
-                            placeholder='Enter your city'
-                            onChange={onAddressChange}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input
-                            type='text'
-                            className='form-control'
-                            id='Address-state'
-                            name='state'
-                            value={state}
-                            placeholder='Enter your state'
-                            onChange={onAddressChange}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input
-                            type='text'
-                            className='form-control'
-                            id='Address-zipcode'
-                            name='zipcode'
-                            value={zipcode}
-                            placeholder='Enter your zipcode'
-                            onChange={onAddressChange}
                         />
                     </div>
                     <div className='form-group'>

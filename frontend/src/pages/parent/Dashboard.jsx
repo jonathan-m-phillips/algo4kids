@@ -1,11 +1,11 @@
 import { React, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import ChildForm from '../components/child/ChildForm'
-import ChildData from '../components/child/ChildData'
-import Spinner from '../components/Spinner'
-import { getChildren } from '../features/child/childSlice'
-import { reset } from '../features/parent/parentSlice'
+import ChildForm from '../../components/child/ChildForm'
+import ChildData from '../../components/child/ChildData'
+import Spinner from '../../components/Spinner'
+import { getChildren } from '../../features/child/childSlice'
+import { reset } from '../../features/parent/parentSlice'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -39,7 +39,7 @@ function Dashboard() {
   return (
     <>
       <section className='heading'>
-        <h1>Welcome {parent && parent.name}</h1>
+        <h1>Welcome, {parent && parent.firstName}.</h1>
         <p>Dashboard</p>
       </section>
 

@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import Spinner from '../components/Spinner'
-import { reset } from '../features/parent/parentSlice'
-import { getAvatars } from '../features/avatar/avatarSlice'
-import AvatarForm from '../components/avatar/AvatarForm'
-import AvatarData from '../components/avatar/AvatarData'
+import Spinner from '../../components/Spinner'
+import { reset } from '../../features/parent/parentSlice'
+import { getAvatars } from '../../features/avatar/avatarSlice'
+import AvatarForm from '../../components/avatar/AvatarForm'
+import AvatarData from '../../components/avatar/AvatarData'
 
 function ChildDashboard() {
     const navigate = useNavigate()

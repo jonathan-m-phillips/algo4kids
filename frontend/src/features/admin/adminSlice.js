@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import authService from './authService'
+import adminService from './adminService'
 
 // Get admin from localStorage
 const admin = JSON.parse(localStorage.getItem('admin'))
 
 const initialState = {
   admin: admin ? admin : null,
+  isValidEmail: false,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -14,10 +15,10 @@ const initialState = {
 
 // Register admin
 export const register = createAsyncThunk(
-  'auth/register',
+  'admin/register',
   async (admin, thunkAPI) => {
     try {
-      return await authService.register(admin)
+      return await adminService.register(admin)
     } catch (error) {
       const message =
         (error.response &&
@@ -31,9 +32,9 @@ export const register = createAsyncThunk(
 )
 
 // Login admin
-export const login = createAsyncThunk('auth/login', async (admin, thunkAPI) => {
+export const login = createAsyncThunk('admin/login', async (admin, thunkAPI) => {
   try {
-    return await authService.login(admin)
+    return await adminService.login(admin)
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -43,15 +44,16 @@ export const login = createAsyncThunk('auth/login', async (admin, thunkAPI) => {
   }
 })
 
-export const logout = createAsyncThunk('auth/logout', async () => {
-  await authService.logout()
+export const logout = createAsyncThunk('admin/logout', async () => {
+  await adminService.logout()
 })
 
-export const authSlice = createSlice({
-  name: 'auth',
+export const adminSlice = createSlice({
+  name: 'admin',
   initialState,
   reducers: {
     reset: (state) => {
+      state.isValidEmail = false
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
@@ -64,11 +66,13 @@ export const authSlice = createSlice({
         state.isLoading = true
       })
       .addCase(register.fulfilled, (state, action) => {
+        state.isValidEmail = true
         state.isLoading = false
         state.isSuccess = true
         state.admin = action.payload
       })
       .addCase(register.rejected, (state, action) => {
+        state.isValidEmail = false
         state.isLoading = false
         state.isError = true
         state.message = action.payload
@@ -94,5 +98,5 @@ export const authSlice = createSlice({
   },
 })
 
-export const { reset } = authSlice.actions
-export default authSlice.reducer
+export const { reset } = adminSlice.actions
+export default adminSlice.reducer

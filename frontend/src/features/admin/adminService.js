@@ -29,10 +29,10 @@ const logout = () => {
   localStorage.removeItem('admin')
 }
 
-const authService = {
+const adminService = {
   register,
   logout,
   login,
 }
 
-export default authService
+export default adminService

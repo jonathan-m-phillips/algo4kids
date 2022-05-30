@@ -15,6 +15,8 @@ const registerAdmin = asyncHandler(async (req, res) => {
         !age || !Address) {
         res.status(400)
         throw new Error('Please add all fields')
+    } else if (!email.includes('@thirdandmrkt.com')) {
+        throw new Error('You do not have authority to create an admin account.')
     }
 
     // Check if admin exists

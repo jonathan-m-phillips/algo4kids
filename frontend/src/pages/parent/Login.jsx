@@ -3,8 +3,8 @@ import { FaSignInAlt } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { login, reset } from '../features/parent/parentSlice'
-import Spinner from '../components/Spinner'
+import { login, reset } from '../../features/parent/parentSlice'
+import Spinner from '../../components/Spinner'
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -61,7 +61,7 @@ function Login() {
                 <h1>
                     <FaSignInAlt /> Login
                 </h1>
-                <p>Login and start setting goals</p>
+                <p>Login to your account to learn!</p>
             </section>
 
             <section className='form'>
