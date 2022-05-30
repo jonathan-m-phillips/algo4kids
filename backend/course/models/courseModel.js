@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const CourseSchema = new mongoose.Schema({
+    admin: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Admin'
+    },
     name: {
         type: String,
         required: true
