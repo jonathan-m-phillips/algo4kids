@@ -27,7 +27,7 @@ function Login() {
         }
 
         if (isSuccess || admin) {
-            navigate('/')
+            navigate('/admin')
         }
 
         dispatch(reset())
