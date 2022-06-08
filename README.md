@@ -4,12 +4,12 @@
 Jonathan Phillips
 
 # Contributor
-Jonathan Phillips
-github: jonathan-m-phillips
+- Jonathan Phillips
+- github: jonathan-m-phillips
 
 # Purpose of project
-This project was created with my daughters and their friends in mind.
-The purpose of Algorhythm 4 Kids is to create a fun enviornment for kids to learn basic Computer Science fundamentals.
+- This project was created with my daughters and their friends in mind.
+- The purpose of Algorhythm 4 Kids is to create a fun enviornment for kids to learn basic Computer Science fundamentals.
 
 # Intentions
 - This project is to create a secure environment where parents need to create a parent account in order to create the individual child's account. Outside users will not be able to access a child's profile at all.
@@ -46,6 +46,6 @@ The purpose of Algorhythm 4 Kids is to create a fun enviornment for kids to lear
 In the terminal, run 'npm run dev'
 
 # Notes
-.env will not be included in this repository
-This is not close to a finished product
-Any tips or recommendations are always accepted
+- .env will not be included in this repository
+- This is not close to a finished product
+- Any tips or recommendations are always accepted
