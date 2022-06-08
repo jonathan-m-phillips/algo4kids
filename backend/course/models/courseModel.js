@@ -6,7 +6,7 @@ const CourseSchema = new mongoose.Schema({
         required: true,
         ref: 'Admin'
     },
-    name: {
+    courseName: {
         type: String,
         required: true
     },
